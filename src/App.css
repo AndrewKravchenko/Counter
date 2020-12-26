@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  margin-top: 5em;
+}
+body{
+  background-color: rgb(41,44,52);
 }
 
 .App-logo {
@@ -35,4 +39,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.button {
+  background-color: rgb(101, 216, 234);
+  font-weight: bolder;
+  font-size: 40px;
+  border-radius: 10px;
+  border: 3px solid black;
+}
+
+
+
+.buttonCounter {
+  display: flex;
+  justify-content: space-around;
+  border: 3px solid rgb(101, 216, 234);
+  border-radius: 10px;
+  margin: auto;
+  padding: 20px;
+  width: 360px;
+}
+
+.displayCounter {
+  color: rgb(101, 216, 234);
+  font-size: 50px;
+  border: 3px solid rgb(101, 216, 234);
+  border-radius: 10px;
+  padding: 50px;
+  width: 300px;
+  margin: auto auto 20px auto;
+}
+.counter {
+  border: 3px solid rgb(101, 216, 234);
+  border-radius: 10px;
+  width: 450px;
+  margin: auto;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
