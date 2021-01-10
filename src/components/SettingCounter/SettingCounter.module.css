@@ -1,0 +1,46 @@
+.displayCounter{
+    color: rgb(101, 216, 234);
+    font-size: 50px;
+    border: 3px solid rgb(101, 216, 234);
+    border-radius: 10px;
+    padding: 50px;
+    width: 300px;
+    margin: auto auto 20px auto;
+    position: absolute;   /*/ относительно экрана или ближ. позишена*/
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+
+
+}
+.error {
+    /*background-color: red;*/
+    font-size: 25px;
+    background-image: linear-gradient(rgba(255,0,0,.3), rgba(255,0,0,.3));
+    border: 3px solid #ff0000;
+    border-radius: 7px;
+    text-align: center;
+    font-weight: bold;
+}
+.settingsTitle{
+    font-size: 28px;
+}
+.settings{
+    display: flex;
+}
+
+input{
+    max-width: 40%;
+    margin: auto;
+    margin-top: 13%;
+    font-size: initial !important;
+}
+.good {
+    /*background-color: rgb(101, 216, 234);*/
+    border: 3px solid rgb(101, 216, 234);
+    /*background-image: linear-gradient(rgba(0, 128, 0, 0.5), rgba(0, 128, 0,.5));*/
+    border-radius: 7px;
+    text-align: center;
+    font-weight: bold;
+
+}

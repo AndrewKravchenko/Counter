@@ -1,0 +1,14 @@
+.counter {
+    border: 3px solid rgb(101, 216, 234);
+    border-radius: 10px;
+    width: 33em;
+    margin: auto;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: absolute;   /*/ относительно экрана или ближ. позишена*/
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
+
