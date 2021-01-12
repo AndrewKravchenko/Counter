@@ -10,7 +10,12 @@ type PropsType = {
     setStartValue: (value: number) => void
     maxValue: number
     setMaxValue: (value: number) => void
-
+    startValueRender: number
+    setStartValueRender: (startRender: number) => void
+    maxValueRender: number
+    setMaxValueRender: (maxRender: number) => void
+    error: string
+    setError: (error: string) => void
 }
 
 function App(props: PropsType) {
@@ -24,9 +29,16 @@ function App(props: PropsType) {
                             display={props.display}
                             reset={props.reset}
                             numUp={props.increment}
+                            startValueRender={props.startValueRender}
+                            setStartValueRender={props.setStartValueRender}
+                            maxValueRender={props.maxValueRender}
+                            setMaxValueRender={props.setMaxValueRender}
+                            error={props.error}
+                            setError={props.setError}
             />
         </div>
     );
 }
+
 
 export default App;

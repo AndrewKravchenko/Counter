@@ -13,36 +13,42 @@ type SettingCounterPropsType = {
     setMaxValue: (max: number) => void
     reset: () => void
     numUp: () => void
+    startValueRender: number
+    setStartValueRender: (startRender: number) => void
+    maxValueRender: number
+    setMaxValueRender: (maxRender: number) => void
+    error: string
+    setError: (error: string) => void
 }
 export const SettingCounter = (props: SettingCounterPropsType) => {
-    const [startValueRender, setStartValueRender] = useState<number>(props.startValue)
-    const [maxValueRender, setMaxValueRender] = useState<number>(props.maxValue)
-    const [error, setError] = useState('')
+    // const [startValueRender, setStartValueRender] = useState<number>(props.startValue)
+    // const [maxValueRender, setMaxValueRender] = useState<number>(props.maxValue)
+    // const [error, setError] = useState('')
 
     const changeStartValueRender = (e: ChangeEvent<HTMLInputElement>) => {
-        setStartValueRender(e.currentTarget.valueAsNumber)
-        check(e.currentTarget.valueAsNumber, maxValueRender)
+        props.setStartValueRender(e.currentTarget.valueAsNumber)
+        check(e.currentTarget.valueAsNumber, props.maxValueRender)
     }
     const changeMaxValueRender = (e: ChangeEvent<HTMLInputElement>) => {
-        setMaxValueRender(e.currentTarget.valueAsNumber)
-        check(startValueRender,e.currentTarget.valueAsNumber)
+        props.setMaxValueRender(e.currentTarget.valueAsNumber)
+        check(props.startValueRender,e.currentTarget.valueAsNumber)
     }
     const check = (begin: number, end: number) => {
         if (begin >= end) {
-            setError("start Value >= max Value")
+            props.setError("start Value >= max Value")
         } else if (begin && end < 0) {
-            setError(" max Value < 0")
+            props.setError(" max Value < 0")
         } else if (begin < 0) {
-            setError(" start Value < 0")
+            props.setError(" start Value < 0")
         } else {
-            setError("")
+            props.setError("")
         }
     }
 
     const setButtonHandler = () => {
-        if (!error) {
-            props.setStartValue(startValueRender)
-            props.setMaxValue(maxValueRender)
+        if (!props.error) {
+            props.setStartValue(props.startValueRender)
+            props.setMaxValue(props.maxValueRender)
             props.reset()
         }
     }
@@ -51,24 +57,26 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
 
         <div className={cl.settings}>
             <p className={cl.settingsTitle}>max value:</p>
-            <input type="number" className={error ? cl.error : cl.good} value={maxValueRender} onChange={changeMaxValueRender}/>
+            <input type="number" className={props.error ? cl.error : cl.good}
+                   value={props.maxValueRender}
+                   onChange={changeMaxValueRender}/>
         </div>
         <div className={cl.settings}>
             <p className={cl.settingsTitle}>start value:</p>
-            <input type="number" className={error ? cl.error : cl.good}
-                   value={startValueRender}
+            <input type="number" className={props.error ? cl.error : cl.good}
+                   value={props.startValueRender}
                    onChange={changeStartValueRender}/>
         </div>
         <div className={cl1.buttonCounter}>
             <Button title={'set'}
-                    disabled={(startValueRender === props.startValue && props.maxValue === maxValueRender) || error !== ""}
+                    disabled={(props.startValueRender === props.startValue && props.maxValue === props.maxValueRender) || props.error !== ""}
                     onClick={setButtonHandler}/>
         </div></div>
         <Counter startValue={props.startValue}
                  maxValue={props.maxValue}
                  reset={props.reset}
                  numUp={props.numUp}
-                 error={error}
+                 error={props.error}
                  display={props.display}/>
     </>
 }

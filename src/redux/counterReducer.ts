@@ -8,11 +8,17 @@ const initialState = {
     startValue: getStartValue(),
     maxValue: getMaxValue(),
     display: getStartValue(),
+    startValueRender: getStartValue(),
+    maxValueRender: getMaxValue(),
+    error: ""
 }
 type Statetype = {
     startValue: number,
     maxValue: number,
-    display: number
+    display: number,
+    startValueRender: number,
+    maxValueRender: number,
+    error: string,
 }
 type NumUpACType = {
     type: 'NUM-UP'
@@ -28,32 +34,63 @@ type StartValueACType = {
     type: 'SET_START'
     value: number
 }
-const SET_NUMBER = "SET_NUMBER"
-const SET_MAX = "SET_MAX_VALUE"
+type StartValueRenderACType = {
+    type: 'SET_START_VALUE_RENDER'
+    value: number
+}
+type MaxValueRenderACType = {
+    type: 'SET_MAX_VALUE_RENDER'
+    value: number
+}
+type ErrorACType = {
+    type: 'ERROR'
+    error: string
+}
+const SET_START_VALUE_RENDER = "SET_START_VALUE_RENDER"
+const SET_MAX_VALUE_RENDER = "SET_MAX_VALUE_RENDER"
+const ERROR = "ERROR"
+const NUM_UP = "NUM-UP"
+const SET_MAX = "SET_MAX"
 const RESET = "RESET"
 const SET_START = "SET_START"
 
-type ActionType = NumUpACType | ResetACType | MaxValueACType | StartValueACType
+type ActionType =
+    NumUpACType
+    | ResetACType
+    | MaxValueACType
+    | StartValueACType
+    | ErrorACType
+    | StartValueRenderACType
+    | MaxValueRenderACType
 
 export const counterReducer = (state: Statetype = initialState, action: ActionType): Statetype => {
     switch (action.type) {
-        case "NUM-UP": {
+        case NUM_UP: {
             const newValue = state.display + 1
             return {
                 ...state,
                 display: newValue
             };
         }
-        case "RESET": {
+        case RESET: {
             return {...state, display: state.startValue};
         }
-        case "SET_START": {
+        case SET_START: {
             localStorage["start"] = action.value
             return {...state, startValue: action.value};
         }
-        case "SET_MAX": {
+        case SET_MAX: {
             localStorage["Max"] = action.value
             return {...state, maxValue: action.value};
+        }
+        case SET_START_VALUE_RENDER: {
+            return {...state, startValueRender: action.value};
+        }
+        case SET_MAX_VALUE_RENDER: {
+            return {...state, maxValueRender: action.value};
+        }
+        case ERROR: {
+            return {...state, error: action.error};
         }
         default:
             return state;
@@ -61,20 +98,24 @@ export const counterReducer = (state: Statetype = initialState, action: ActionTy
 };
 
 export const NumUpAC = (): NumUpACType => {
-    return {type: "NUM-UP"}
+    return {type: NUM_UP}
 }
 export const ResetAC = (): ResetACType => {
-    return {type: "RESET"}
+    return {type: RESET}
 }
 export const MaxValueAC = (value: number): MaxValueACType => {
-    return {type: "SET_MAX", value}
+    return {type: SET_MAX, value}
 }
 export const StartValueAC = (value: number): StartValueACType => {
-    return {type: "SET_START", value}
+    return {type: SET_START, value}
 }
 
-const addN = (n: number) =>{
-    return (a: number) => a + n
+export const StartValueRenderAC = (value: number): StartValueRenderACType => {
+    return {type: SET_START_VALUE_RENDER, value}
 }
-const add5 = (addN(5))
-add5 (5)
+export const MaxValueRenderAC = (value: number): MaxValueRenderACType => {
+    return {type: SET_MAX_VALUE_RENDER, value}
+}
+export const ErrorAC = (error: string): ErrorACType => {
+    return {type: "ERROR", error}
+}
